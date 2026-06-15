@@ -1,0 +1,1069 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Um Guia para LinkedIn Iniciantes | Página de Vendas</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            cream: '#FFFDF0',
+                            creamDark: '#FFF9D4',
+                            navy: '#1B365D',
+                            navyDark: '#10223D',
+                            orange: '#FF5500',
+                            orangeDark: '#E04A00',
+                            red: '#D32F2F',
+                            gray: '#F4F4F6'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght=300;400;500;600;700;800&display=swap');
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #FFFDF0;
+        }
+        .gradient-bg {
+            background: linear-gradient(135deg, #FFFDF0 0%, #FFF9D4 100%);
+        }
+        .glow-orange:hover {
+            box-shadow: 0 10px 25px -5px rgba(255, 85, 0, 0.4);
+        }
+    </style>
+</head>
+<body class="text-slate-800 selection:bg-brand-orange selection:text-white overflow-x-hidden">
+
+    <!-- TOP ANNOUNCEMENT BAR -->
+    <div class="bg-brand-navy text-white text-xs md:text-sm py-2 px-4 text-center font-semibold tracking-wide">
+        🔥 <span class="text-brand-orange">Oferta Especial de Lançamento:</span> Garanta o Pacote Completo com mais de 50% de Desconto!
+    </div>
+
+    <!-- LIVE CUSTOMIZER / EDITOR PANEL -->
+    <div id="editorPanel" class="fixed bottom-4 right-4 z-50 w-[calc(100vw-2rem)] sm:w-[450px] bg-white border border-slate-200 rounded-2xl shadow-2xl p-6 transition-all duration-300 transform translate-y-0 scale-100 max-h-[85vh] overflow-y-auto hidden">
+        <div class="flex items-center justify-between border-b pb-3 mb-4">
+            <div class="flex items-center gap-2">
+                <i data-lucide="sliders" class="text-brand-orange w-5 h-5"></i>
+                <h3 class="font-bold text-slate-900">Configurador Hotmart</h3>
+            </div>
+            <button onclick="toggleEditor()" class="p-1 hover:bg-slate-100 rounded-lg">
+                <i data-lucide="x" class="w-5 h-5"></i>
+            </button>
+        </div>
+        
+        <p class="text-xs text-slate-500 mb-5">Insira seus links reais de checkout da Hotmart abaixo e clique em aplicar. A página atualizará automaticamente todos os botões de compra!</p>
+        
+        <div class="space-y-5">
+            <!-- COVERS IMAGES CONFIGURATION -->
+            <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-100 space-y-3">
+                <span class="text-[10px] font-black tracking-widest text-brand-navy uppercase block">Imagens Reais das Capas</span>
+                <div>
+                    <label class="block text-[10px] font-bold uppercase text-slate-500 mb-1">Imagem do Ebook</label>
+                    <input type="text" id="cfgEbookImg" value="Ebook - Guia Linkedin.png" class="w-full border border-slate-200 bg-white rounded-lg p-2 text-xs focus:ring-2 focus:ring-brand-orange focus:outline-none font-mono text-slate-600">
+                </div>
+                <div>
+                    <label class="block text-[10px] font-bold uppercase text-slate-500 mb-1">Imagem do Audiobook</label>
+                    <input type="text" id="cfgAudiobookImg" value="Audiobook - Guia Linkedin.jpg" class="w-full border border-slate-200 bg-white rounded-lg p-2 text-xs focus:ring-2 focus:ring-brand-orange focus:outline-none font-mono text-slate-600">
+                </div>
+                <div>
+                    <label class="block text-[10px] font-bold uppercase text-slate-500 mb-1">Imagem do Pacote</label>
+                    <input type="text" id="cfgBundleImg" value="Pacote - Produto Digital.jpg" class="w-full border border-slate-200 bg-white rounded-lg p-2 text-xs focus:ring-2 focus:ring-brand-orange focus:outline-none font-mono text-slate-600">
+                </div>
+            </div>
+
+            <!-- EBOOK SECTION -->
+            <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-100 space-y-3">
+                <span class="text-[10px] font-black tracking-widest text-brand-navy uppercase block">Configurações do Ebook</span>
+                <div>
+                    <label class="block text-[10px] font-bold uppercase text-slate-500 mb-1">Preço do Ebook (R$)</label>
+                    <input type="text" id="cfgEbookPrice" value="19,90" class="w-full border border-slate-200 bg-white rounded-lg p-2 text-sm focus:ring-2 focus:ring-brand-orange focus:outline-none font-semibold">
+                </div>
+                <div>
+                    <label class="block text-[10px] font-bold uppercase text-slate-500 mb-1">Link de Checkout</label>
+                    <input type="text" id="cfgEbookLink" value="https://pay.hotmart.com/EbookLinkPlaceholder" class="w-full border border-slate-200 bg-white rounded-lg p-2 text-xs focus:ring-2 focus:ring-brand-orange focus:outline-none font-mono text-slate-600">
+                </div>
+            </div>
+            
+            <!-- AUDIOBOOK SECTION -->
+            <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-100 space-y-3">
+                <span class="text-[10px] font-black tracking-widest text-brand-navy uppercase block">Configurações do Audiobook</span>
+                <div>
+                    <label class="block text-[10px] font-bold uppercase text-slate-500 mb-1">Preço do Audiobook (R$)</label>
+                    <input type="text" id="cfgAudiobookPrice" value="39,90" class="w-full border border-slate-200 bg-white rounded-lg p-2 text-sm focus:ring-2 focus:ring-brand-orange focus:outline-none font-semibold">
+                </div>
+                <div>
+                    <label class="block text-[10px] font-bold uppercase text-slate-500 mb-1">Link de Checkout</label>
+                    <input type="text" id="cfgAudiobookLink" value="https://pay.hotmart.com/AudiobookLinkPlaceholder" class="w-full border border-slate-200 bg-white rounded-lg p-2 text-xs focus:ring-2 focus:ring-brand-orange focus:outline-none font-mono text-slate-600">
+                </div>
+            </div>
+            
+            <!-- BUNDLE SECTION -->
+            <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-100 space-y-3">
+                <span class="text-[10px] font-black tracking-widest text-brand-navy uppercase block">Configurações do Pacote</span>
+                <div>
+                    <label class="block text-[10px] font-bold uppercase text-slate-500 mb-1">Preço do Pacote (R$)</label>
+                    <input type="text" id="cfgBundlePrice" value="49,90" class="w-full border border-slate-200 bg-white rounded-lg p-2 text-sm focus:ring-2 focus:ring-brand-orange focus:outline-none font-semibold">
+                </div>
+                <div>
+                    <label class="block text-[10px] font-bold uppercase text-slate-500 mb-1">Link de Checkout</label>
+                    <input type="text" id="cfgBundleLink" value="https://pay.hotmart.com/BundleLinkPlaceholder" class="w-full border border-slate-200 bg-white rounded-lg p-2 text-xs focus:ring-2 focus:ring-brand-orange focus:outline-none font-mono text-slate-600">
+                </div>
+            </div>
+            
+            <!-- ADDITIONAL FIELDS -->
+            <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-100 space-y-3">
+                <span class="text-[10px] font-black tracking-widest text-brand-navy uppercase block">Metadados Gerais</span>
+                <div>
+                    <label class="block text-[10px] font-bold uppercase text-slate-500 mb-1">Pasta do Google Drive (Materiais do Afiliado)</label>
+                    <input type="text" id="cfgDriveLink" value="https://drive.google.com/drive/folders/1AwzigF9I9EQz9wO7swSX4CEM-CaNJL0R?usp=drive_link" class="w-full border border-slate-200 bg-white rounded-lg p-2 text-xs focus:ring-2 focus:ring-brand-orange focus:outline-none font-mono text-slate-600">
+                </div>
+                <div>
+                    <label class="block text-[10px] font-bold uppercase text-slate-500 mb-1">Nome do Autor</label>
+                    <input type="text" id="cfgAuthorName" value="Anderson Chiesa" class="w-full border border-slate-200 bg-white rounded-lg p-2 text-sm focus:ring-2 focus:ring-brand-orange focus:outline-none font-semibold">
+                </div>
+            </div>
+
+            <div class="pt-2 space-y-2">
+                <button onclick="applyConfigurations()" class="w-full bg-brand-orange hover:bg-brand-orangeDark text-white font-bold py-3 rounded-xl text-sm transition-all shadow-md">
+                    Aplicar e Atualizar Página
+                </button>
+                <button onclick="exportCustomizedHTML()" class="w-full bg-brand-navy hover:bg-brand-navyDark text-white font-bold py-2.5 rounded-xl text-xs transition-all flex items-center justify-center gap-1.5">
+                    <i data-lucide="download" class="w-4 h-4"></i> Baixar HTML Pronto para Hotmart
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- FLOATING CONFIG BUTTON -->
+    <button onclick="toggleEditor()" class="fixed bottom-4 right-4 z-40 bg-brand-navy text-white hover:bg-brand-navyDark p-4 rounded-full shadow-2xl flex items-center justify-center gap-2 border-2 border-white transition-all transform hover:scale-105">
+        <i data-lucide="settings" class="w-6 h-6 animate-spin-slow"></i>
+        <span class="text-xs font-bold pr-1">Configurar Página</span>
+    </button>
+
+    <!-- NOTIFICATION BOX -->
+    <div id="notification" class="fixed top-5 left-1/2 transform -translate-x-1/2 z-50 bg-slate-900 text-white px-6 py-3 rounded-xl shadow-2xl flex items-center gap-2 transition-all duration-300 opacity-0 translate-y-[-20px] pointer-events-none">
+        <i data-lucide="check-circle" class="text-emerald-400 w-5 h-5"></i>
+        <span id="notificationText" class="text-sm font-medium">Configurações salvas!</span>
+    </div>
+
+    <!-- MAIN HEADER -->
+    <header class="border-b border-orange-100 bg-brand-cream/80 backdrop-blur-md sticky top-0 z-30">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-4">
+            
+            <div class="flex items-center gap-3 flex-shrink-0">
+                <div class="relative w-10 h-10 flex items-center justify-center bg-gradient-to-tr from-brand-navy to-brand-navyDark rounded-xl shadow-md border border-slate-700/10">
+                    <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 19V8" stroke="#FFF9D4" stroke-width="2" stroke-linecap="round"/>
+                        <path d="M12 8C9 4 4 5 4 10C4 15 9 16 12 14" stroke="#FFF9D4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M12 8C15 4 20 5 20 10C20 15 15 16 12 14" fill="#FF5500" stroke="#FF5500" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill-opacity="0.2"/>
+                        <circle cx="12" cy="11" r="1.5" fill="#FFF9D4"/>
+                    </svg>
+                </div>
+                <div>
+                    <span class="font-extrabold text-brand-navy text-lg block leading-none tracking-tight">LINKEDIN</span>
+                    <span class="text-[10px] text-brand-orange font-bold uppercase tracking-widest block mt-0.5">Iniciantes</span>
+                </div>
+            </div>
+            
+            <nav class="hidden lg:flex items-center gap-5 xl:gap-8 text-xs xl:text-sm font-semibold text-brand-navy">
+                <a href="#transformacao" class="hover:text-brand-orange transition-colors">A Metamorfose</a>
+                <a href="#conteudo" class="hover:text-brand-orange transition-colors">Grade Curricular</a>
+                <a href="#precos" class="hover:text-brand-orange transition-colors">Planos & Preços</a>
+                <a href="#afiliados" class="hover:text-brand-orange text-brand-orange font-bold bg-orange-50 px-3 py-1.5 rounded-lg transition-all">Área do Afiliado</a>
+            </nav>
+
+            <div class="flex-shrink-0">
+                <a href="#precos" class="bg-brand-navy hover:bg-brand-navyDark text-white font-bold px-4 py-2.5 xl:px-5 rounded-xl text-xs xl:text-sm transition-all flex items-center gap-2">
+                    Quero Começar <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="relative pt-12 pb-24 overflow-hidden gradient-bg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-12 gap-12 items-center">
+                
+                <!-- Hero Left: Sales Pitch -->
+                <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+                    <div class="inline-flex items-center gap-2 bg-orange-100 text-brand-orange px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest">
+                        🚀 Método 100% Orgânico & Gratuito
+                    </div>
+                    
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-brand-navy tracking-tight leading-tight">
+                        Seu Perfil no LinkedIn de <br class="hidden sm:block">
+                        <span class="text-brand-orange underline decoration-wavy decoration-orange-300">Invisível</span> a 
+                        <span class="text-emerald-600">Irresistível</span>
+                    </h1>
+                    
+                    <p class="text-lg text-slate-600 max-w-2xl mx-auto lg:mx-0">
+                        Aprenda a construir uma vitrine profissional de altíssimo impacto, atrair recrutadores e fechar conexões poderosas utilizando exclusivamente recursos gratuitos da plataforma.
+                    </p>
+
+                    <!-- Trust indicators with ISBN -->
+                    <div class="bg-white/60 backdrop-blur-sm border border-orange-200/50 rounded-xl p-3.5 max-w-md mx-auto lg:mx-0 text-left flex items-center gap-3">
+                        <i data-lucide="award" class="text-brand-orange w-8 h-8 shrink-0"></i>
+                        <div>
+                            <span class="text-xs font-bold text-brand-navy block uppercase tracking-wider">Obra Original Registrada</span>
+                            <span class="text-xs text-slate-500 font-mono">ISBN nº 978-65-01-44178-8 • 153 Páginas</span>
+                        </div>
+                    </div>
+
+                    <div class="pt-4 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
+                        <a href="#precos" class="w-full sm:w-auto bg-brand-orange hover:bg-brand-orangeDark text-white font-extrabold px-8 py-4 rounded-xl shadow-lg shadow-orange-500/20 text-center transition-all transform hover:-translate-y-0.5 glow-orange flex items-center justify-center gap-2">
+                            Ver Opções & Comprar <i data-lucide="arrow-right" class="w-5 h-5"></i>
+                        </a>
+                        <a href="#conteudo" class="w-full sm:w-auto bg-white/80 hover:bg-white text-brand-navy border border-orange-200 font-bold px-8 py-4 rounded-xl text-center transition-all flex items-center justify-center gap-2">
+                            Ver as 18 Lições <i data-lucide="chevron-down" class="w-4 h-4"></i>
+                        </a>
+                    </div>
+
+                    <!-- Trust indicators -->
+                    <div class="pt-8 border-t border-orange-200/50 flex flex-wrap items-center justify-center lg:justify-start gap-8 text-slate-600 text-sm">
+                        <div class="flex items-center gap-2">
+                            <i data-lucide="shield-check" class="text-emerald-500 w-5 h-5"></i>
+                            <span>Acesso imediato Hotmart</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i data-lucide="star" class="text-amber-500 fill-amber-500 w-5 h-5"></i>
+                            <span>7 Dias de Garantia Incondicional</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Hero Right: Dynamic product switcher showing real images -->
+                <div class="lg:col-span-5 flex flex-col items-center justify-center relative">
+                    <div class="absolute -z-10 w-72 h-72 bg-orange-300/20 rounded-full blur-3xl"></div>
+                    
+                    <!-- Cover Switcher Buttons -->
+                    <div class="flex bg-slate-100/80 p-1.5 rounded-xl mb-6 border border-slate-200/50">
+                        <button onclick="switchCover('bundle')" id="btn-cov-bundle" class="px-4 py-2 rounded-lg text-xs font-bold transition-all bg-brand-navy text-white shadow-sm">Pacote Completo</button>
+                        <button onclick="switchCover('ebook')" id="btn-cov-ebook" class="px-4 py-2 rounded-lg text-xs font-bold transition-all text-slate-600 hover:text-slate-950">Ebook</button>
+                        <button onclick="switchCover('audiobook')" id="btn-cov-audiobook" class="px-4 py-2 rounded-lg text-xs font-bold transition-all text-slate-600 hover:text-slate-950">Audiobook</button>
+                    </div>
+
+                    <!-- Cover Display Container hosting the real image rendering -->
+                    <div id="coverContainer" class="w-72 sm:w-80 aspect-[1/1.6] rounded-2xl shadow-2xl border-4 border-white overflow-hidden transition-all duration-300 transform hover:scale-102 flex flex-col relative bg-[#FFFDF0]">
+                        
+                        <!-- 1. BUNDLE REAL COVER IMAGE -->
+                        <div id="cover-bundle" class="absolute inset-0 w-full h-full">
+                            <img id="img-cover-bundle" src="Pacote - Produto Digital.jpg" alt="Capa Pacote Completo" class="w-full h-full object-cover" onerror="handleImageError(this, 'Pacote Completo')">
+                        </div>
+
+                        <!-- 2. EBOOK REAL COVER IMAGE (Hidden initially) -->
+                        <div id="cover-ebook" class="absolute inset-0 w-full h-full hidden">
+                            <img id="img-cover-ebook" src="Ebook - Guia Linkedin.png" alt="Capa Ebook Digital" class="w-full h-full object-cover" onerror="handleImageError(this, 'Ebook Digital')">
+                        </div>
+
+                        <!-- 3. AUDIOBOOK REAL COVER IMAGE (Hidden initially) -->
+                        <div id="cover-audiobook" class="absolute inset-0 w-full h-full hidden">
+                            <img id="img-cover-audiobook" src="Audiobook - Guia Linkedin.jpg" alt="Capa Audiobook" class="w-full h-full object-cover" onerror="handleImageError(this, 'Audiobook')">
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- LA METAMORFOSE: THE TRANSFORMATION VALUE PROPOSITION -->
+    <section id="transformacao" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
+                <span class="text-brand-orange font-bold text-xs uppercase tracking-widest">A Metamorfose do Seu Perfil</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-brand-navy">O Conceito do Casulo (Crisálida)</h2>
+                <p class="text-slate-600 text-lg">
+                    Assim como uma borboleta passa pelo estágio de crisálida para se transformar em sua forma mais gloriosa, o seu perfil no LinkedIn hoje é apenas o começo da sua evolução.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Step 1: O Casulo -->
+                <div class="bg-brand-cream border border-orange-100 rounded-2xl p-8 space-y-4 transition-all hover:shadow-xl">
+                    <div class="w-12 h-12 rounded-xl bg-orange-100 flex items-center justify-center text-brand-orange">
+                        <i data-lucide="lock" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-brand-navy">1. Estágio Oculto</h3>
+                    <p class="text-sm text-slate-600 leading-relaxed">
+                        Hoje seu perfil pode estar desatualizado, sem conexões, ou talvez você nem tenha uma conta. Recrutadores passam por você sem notar o seu potencial de mercado.
+                    </p>
+                </div>
+
+                <!-- Step 2: A Evolução Interna -->
+                <div class="bg-brand-cream border border-orange-100 rounded-2xl p-8 space-y-4 transition-all hover:shadow-xl">
+                    <div class="w-12 h-12 rounded-xl bg-emerald-100 flex items-center justify-center text-emerald-600">
+                        <i data-lucide="cpu" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-brand-navy">2. Reestruturação Estruturada</h3>
+                    <p class="text-sm text-slate-600 leading-relaxed">
+                        Seguindo as lições práticas, você vai configurar suas palavras-chave corretas, construir o seu "Título Magnético" e otimizar suas experiências de forma real e atraente.
+                    </p>
+                </div>
+
+                <!-- Step 3: O Voo -->
+                <div class="bg-brand-cream border border-orange-100 rounded-2xl p-8 space-y-4 transition-all hover:shadow-xl">
+                    <div class="w-12 h-12 rounded-xl bg-blue-100 flex items-center justify-center text-blue-600">
+                        <i data-lucide="wind" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-brand-navy">3. Visibilidade Imparável</h3>
+                    <p class="text-sm text-slate-600 leading-relaxed">
+                        Seu perfil vira um verdadeiro ímã de oportunidades profissionais. Você começa a ser encontrado ativamente em buscas por recrutadores em todo o país.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTEÚDO DETALHADO -->
+    <section id="conteudo" class="py-20 gradient-bg border-t border-b border-orange-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
+                <span class="text-brand-orange font-bold text-xs uppercase tracking-widest">O que você vai aprender na prática</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-brand-navy leading-tight">Os 6 Módulos & 18 Lições Oficiais</h2>
+                <p class="text-slate-600 text-sm">
+                    Nenhum conteúdo fictício ou superficial. O Guia foi estruturado cirurgicamente do básico ao avançado ao longo de <strong>153 páginas</strong> de pura prática.
+                </p>
+            </div>
+
+            <!-- Beautiful interactive accordion grid for the 6 official modules -->
+            <div class="grid lg:grid-cols-2 gap-8 items-start">
+                
+                <!-- Module 1, 2, 3 Column -->
+                <div class="space-y-6">
+                    <!-- Module 1 -->
+                    <div class="bg-white border border-orange-200/50 rounded-2xl p-6 shadow-sm">
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="bg-orange-50 text-brand-orange text-[10px] font-black uppercase tracking-wider px-2.5 py-1 rounded-md">Módulo 1</span>
+                            <span class="text-xs text-slate-400 font-medium">Pág. 12</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-brand-navy mb-3">Primeiros Passos no LinkedIn - Criando sua Base</h3>
+                        <ul class="space-y-2.5 text-sm text-slate-600">
+                            <li class="flex items-start gap-2.5">
+                                <i data-lucide="play-circle" class="w-4 h-4 text-brand-orange mt-0.5 shrink-0"></i>
+                                <span><strong>Lição 1:</strong> O que é LinkedIn e por que você deveria estar lá?</span>
+                            </li>
+                            <li class="flex items-start gap-2.5">
+                                <i data-lucide="play-circle" class="w-4 h-4 text-brand-orange mt-0.5 shrink-0"></i>
+                                <span><strong>Lição 2:</strong> Criando sua conta no LinkedIn (Passo a Passo)</span>
+                            </li>
+                            <li class="flex items-start gap-2.5">
+                                <i data-lucide="play-circle" class="w-4 h-4 text-brand-orange mt-0.5 shrink-0"></i>
+                                <span><strong>Lição 3:</strong> Navegando pela Interface - Conhecendo a Plataforma</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Module 2 -->
+                    <div class="bg-white border border-orange-200/50 rounded-2xl p-6 shadow-sm">
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="bg-orange-50 text-brand-orange text-[10px] font-black uppercase tracking-wider px-2.5 py-1 rounded-md">Módulo 2</span>
+                            <span class="text-xs text-slate-400 font-medium">Pág. 20</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-brand-navy mb-3">Criando um Perfil Campeão - Sua Vitrine</h3>
+                        <ul class="space-y-2.5 text-sm text-slate-600">
+                            <li class="flex items-start gap-2.5">
+                                <i data-lucide="play-circle" class="w-4 h-4 text-brand-orange mt-0.5 shrink-0"></i>
+                                <span><strong>Lição 1:</strong> A Importância de um Perfil Completo e Atraente</span>
+                            </li>
+                            <li class="flex items-start gap-2.5">
+                                <i data-lucide="play-circle" class="w-4 h-4 text-brand-orange mt-0.5 shrink-0"></i>
+                                <span><strong>Lição 2:</strong> Seções Essenciais (Headline, Sobre, Experiência, Competências)</span>
+                            </li>
+                            <li class="flex items-start gap-2.5">
+                                <i data-lucide="play-circle" class="w-4 h-4 text-brand-orange mt-0.5 shrink-0"></i>
+                                <span><strong>Lição 3:</strong> Otimizando seu Perfil para Busca (SEO do LinkedIn)</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Module 3 -->
+                    <div class="bg-white border border-orange-200/50 rounded-2xl p-6 shadow-sm">
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="bg-orange-50 text-brand-orange text-[10px] font-black uppercase tracking-wider px-2.5 py-1 rounded-md">Módulo 3</span>
+                            <span class="text-xs text-slate-400 font-medium">Pág. 44</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-brand-navy mb-3">Networking Estratégico no LinkedIn</h3>
+                        <ul class="space-y-2.5 text-sm text-slate-600 font-medium">
+                            <li class="flex items-start gap-2.5">
+                                <i data-lucide="play-circle" class="w-4 h-4 text-brand-orange mt-0.5 shrink-0"></i>
+                                <span><strong>Lição 1:</strong> A Importância do Networking Real</span>
+                            </li>
+                            <li class="flex items-start gap-2.5">
+                                <i data-lucide="play-circle" class="w-4 h-4 text-brand-orange mt-0.5 shrink-0"></i>
+                                <span><strong>Lição 2:</strong> Encontrando e Conectando-se com Pessoas Relevantes</span>
+                            </li>
+                            <li class="flex items-start gap-2.5">
+                                <i data-lucide="play-circle" class="w-4 h-4 text-brand-orange mt-0.5 shrink-0"></i>
+                                <span><strong>Lição 3:</strong> Mensagens de Conexão Personalizadas e Taxa de Aceitação</span>
+                            </li>
+                            <li class="flex items-start gap-2.5">
+                                <i data-lucide="play-circle" class="w-4 h-4 text-brand-orange mt-0.5 shrink-0"></i>
+                                <span><strong>Lição 4:</strong> Engajamento na Rede - Construindo Relacionamentos</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Module 4, 5, 6 Column -->
+                <div class="space-y-6">
+                    <!-- Module 4 -->
+                    <div class="bg-white border border-orange-200/50 rounded-2xl p-6 shadow-sm">
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="bg-orange-50 text-brand-orange text-[10px] font-black uppercase tracking-wider px-2.5 py-1 rounded-md">Módulo 4</span>
+                            <span class="text-xs text-slate-400 font-medium">Pág. 73</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-brand-navy mb-3">Explorando Oportunidades - Vagas e Mais</h3>
+                        <ul class="space-y-2.5 text-sm text-slate-600">
+                            <li class="flex items-start gap-2.5">
+                                <i data-lucide="play-circle" class="w-4 h-4 text-brand-orange mt-0.5 shrink-0"></i>
+                                <span><strong>Lição 1:</strong> Buscando Vagas (Filtros e Alertas Práticos)</span>
+                            </li>
+                            <li class="flex items-start gap-2.5">
+                                <i data-lucide="play-circle" class="w-4 h-4 text-brand-orange mt-0.5 shrink-0"></i>
+                                <span><strong>Lição 2:</strong> Vagas Ocultas e como Atuar de Forma Discreta</span>
+                            </li>
+                            <li class="flex items-start gap-2.5">
+                                <i data-lucide="play-circle" class="w-4 h-4 text-brand-orange mt-0.5 shrink-0"></i>
+                                <span><strong>Lição 3:</strong> Explorando Empresas - Cultura e Informação do Setor</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Module 5 -->
+                    <div class="bg-white border border-orange-200/50 rounded-2xl p-6 shadow-sm">
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="bg-orange-50 text-brand-orange text-[10px] font-black uppercase tracking-wider px-2.5 py-1 rounded-md">Módulo 5</span>
+                            <span class="text-xs text-slate-400 font-medium">Pág. 107</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-brand-navy mb-3">LinkedIn Learning Gratuito - Habilidades</h3>
+                        <ul class="space-y-2.5 text-sm text-slate-600">
+                            <li class="flex items-start gap-2.5">
+                                <i data-lucide="play-circle" class="w-4 h-4 text-brand-orange mt-0.5 shrink-0"></i>
+                                <span><strong>Lição 1:</strong> Acessando Cursos Gratuitos no LinkedIn Learning</span>
+                            </li>
+                            <li class="flex items-start gap-2.5">
+                                <i data-lucide="play-circle" class="w-4 h-4 text-brand-orange mt-0.5 shrink-0"></i>
+                                <span><strong>Lição 2:</strong> Aproveitando ao Máximo o Período Gratuito</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Module 6 -->
+                    <div class="bg-white border border-orange-200/50 rounded-2xl p-6 shadow-sm">
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="bg-orange-50 text-brand-orange text-[10px] font-black uppercase tracking-wider px-2.5 py-1 rounded-md">Módulo 6</span>
+                            <span class="text-xs text-slate-400 font-medium">Pág. 126</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-brand-navy mb-3">Dicas Extras e Boas Práticas (Conta Gratuita)</h3>
+                        <ul class="space-y-2.5 text-sm text-slate-600">
+                            <li class="flex items-start gap-2.5">
+                                <i data-lucide="play-circle" class="w-4 h-4 text-brand-orange mt-0.5 shrink-0"></i>
+                                <span><strong>Lição 1:</strong> Consistência, Frequência e Rotina Prática</span>
+                            </li>
+                            <li class="flex items-start gap-2.5">
+                                <i data-lucide="play-circle" class="w-4 h-4 text-brand-orange mt-0.5 shrink-0"></i>
+                                <span><strong>Lição 2:</strong> Privacidade e Segurança no LinkedIn</span>
+                            </li>
+                            <li class="flex items-start gap-2.5">
+                                <i data-lucide="play-circle" class="w-4 h-4 text-brand-orange mt-0.5 shrink-0"></i>
+                                <span><strong>Lição 3:</strong> Aproveitando Recursos ao Máximo (Pulse, Eventos)</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- PRICING TABLE -->
+    <section id="precos" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-16 space-y-4">
+                <span class="text-brand-orange font-bold text-xs uppercase tracking-widest">Selecione seu melhor caminho</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-brand-navy">Oportunidades que Cabem no Seu Bolso</h2>
+                <p class="text-slate-600">Escolha o produto ideal para o seu momento de carreira. Todo o conteúdo é de acesso imediato.</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8 items-stretch">
+                
+                <!-- Card 1: Ebook Standard -->
+                <div class="border border-slate-200 hover:border-brand-navy rounded-3xl p-8 bg-white flex flex-col justify-between transition-all hover:shadow-lg relative">
+                    <div class="space-y-6">
+                        <div>
+                            <span class="bg-slate-100 text-slate-700 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Leitura Rápida</span>
+                            <h3 class="text-2xl font-bold text-brand-navy mt-4">Ebook Digital</h3>
+                            <p class="text-slate-500 text-xs mt-1">Guia de leitura prática, direta e extremamente acionável.</p>
+                        </div>
+
+                        <div class="pt-4 border-t border-slate-100 flex items-baseline gap-1">
+                            <span class="text-sm font-semibold text-slate-500">R$</span>
+                            <span class="text-4xl font-black text-brand-navy" id="cardEbookPrice">19,90</span>
+                            <span class="text-xs text-slate-400">Taxa única</span>
+                        </div>
+
+                        <ul class="space-y-3 pt-4 text-xs text-slate-600">
+                            <li class="flex items-center gap-2">
+                                <i data-lucide="check" class="text-emerald-500 w-4 h-4 shrink-0"></i>
+                                <span>Guia Completo (153 páginas)</span>
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <i data-lucide="check" class="text-emerald-500 w-4 h-4 shrink-0"></i>
+                                <span>Todas as 18 Lições oficiais</span>
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <i data-lucide="check" class="text-emerald-500 w-4 h-4 shrink-0"></i>
+                                <span>ISBN Registrado de Fábrica</span>
+                            </li>
+                            <li class="flex items-center gap-2 text-slate-300 line-through">
+                                <i data-lucide="x" class="text-slate-300 w-4 h-4 shrink-0"></i>
+                                <span>Audiobook completo em alta qualidade</span>
+                            </li>
+                            <li class="flex items-center gap-2 text-slate-300 line-through">
+                                <i data-lucide="x" class="text-slate-300 w-4 h-4 shrink-0"></i>
+                                <span>Templates de Mensagens & bônus</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="pt-8">
+                        <a href="https://pay.hotmart.com/EbookLinkPlaceholder" id="btnEbookLink" class="block w-full bg-brand-navy hover:bg-brand-navyDark text-white text-center font-bold py-3 px-4 rounded-xl transition-all text-sm">
+                            Comprar Ebook
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Card 2: BUNDLE (Most Popular/Best Value) -->
+                <div class="border-2 border-brand-orange rounded-3xl p-8 bg-[#FFFDF0] flex flex-col justify-between transition-all shadow-xl hover:shadow-2xl relative transform md:-translate-y-4">
+                    <div class="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-brand-orange text-white text-xs font-black px-4 py-1.5 rounded-full uppercase tracking-widest shadow-md">
+                        🔥 MELHOR CUSTO-BENEFÍCIO
+                    </div>
+
+                    <div class="space-y-6">
+                        <div class="mt-2">
+                            <span class="bg-orange-100 text-brand-orange text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Metamorfose Completa</span>
+                            <h3 class="text-2xl font-black text-brand-navy mt-4">Pacote Completo</h3>
+                            <p class="text-slate-600 text-xs mt-1">Ebook + Audiobook + Todos os Bônus Especiais de Lançamento.</p>
+                        </div>
+
+                        <div class="pt-4 border-t border-orange-200/50">
+                            <span class="text-xs text-slate-400 block line-through">De: R$ 109,70</span>
+                            <div class="flex items-baseline gap-1 mt-1">
+                                <span class="text-sm font-semibold text-brand-orange">R$</span>
+                                <span class="text-5xl font-black text-brand-navy" id="cardBundlePrice">49,90</span>
+                                <span class="text-xs text-slate-500">Taxa única</span>
+                            </div>
+                        </div>
+
+                        <ul class="space-y-3 pt-4 text-xs text-slate-700 font-medium">
+                            <li class="flex items-center gap-2">
+                                <i data-lucide="check" class="text-emerald-600 w-4 h-4 shrink-0"></i>
+                                <span>Ebook Completo (153 páginas)</span>
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <i data-lucide="check" class="text-emerald-600 w-4 h-4 shrink-0"></i>
+                                <span>Audiobook Completo (.MP3)</span>
+                            </li>
+                            <li class="flex items-center gap-2 text-brand-orange">
+                                <i data-lucide="sparkles" class="w-4 h-4 shrink-0"></i>
+                                <span>Bônus: Templates Prontos de Abordagem</span>
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <i data-lucide="check" class="text-emerald-600 w-4 h-4 shrink-0"></i>
+                                <span>Bônus: Checklist Prático de Perfil</span>
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <i data-lucide="check" class="text-emerald-600 w-4 h-4 shrink-0"></i>
+                                <span>Bônus: Estudos de Caso Reais</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="pt-8">
+                        <a href="https://pay.hotmart.com/BundleLinkPlaceholder" id="btnBundleLink" class="block w-full bg-brand-orange hover:bg-brand-orangeDark text-white text-center font-extrabold py-4 px-4 rounded-xl transition-all text-sm shadow-md shadow-orange-500/10 glow-orange">
+                            Comprar Pacote Completo
+                        </a>
+                        <span class="text-[10px] text-slate-500 text-center block mt-2">Acesso vitalício aos materiais</span>
+                    </div>
+                </div>
+
+                <!-- Card 3: Audiobook Only -->
+                <div class="border border-slate-200 hover:border-brand-navy rounded-3xl p-8 bg-white flex flex-col justify-between transition-all hover:shadow-lg relative">
+                    <div class="space-y-6">
+                        <div>
+                            <span class="bg-red-50 text-brand-red text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Áudio Estudo</span>
+                            <h3 class="text-2xl font-bold text-brand-navy mt-4">Somente Audiobook</h3>
+                            <p class="text-slate-500 text-xs mt-1">Ouça e aprenda a otimizar seu perfil de forma conveniente e produtiva.</p>
+                        </div>
+
+                        <div class="pt-4 border-t border-slate-100 flex items-baseline gap-1">
+                            <span class="text-sm font-semibold text-slate-500">R$</span>
+                            <span class="text-4xl font-black text-brand-navy" id="cardAudiobookPrice">39,90</span>
+                            <span class="text-xs text-slate-400">Taxa única</span>
+                        </div>
+
+                        <ul class="space-y-3 pt-4 text-xs text-slate-600">
+                            <li class="flex items-center gap-2">
+                                <i data-lucide="check" class="text-emerald-500 w-4 h-4 shrink-0"></i>
+                                <span>Gravação profissional de alta fidelidade</span>
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <i data-lucide="check" class="text-emerald-500 w-4 h-4 shrink-0"></i>
+                                <span>Ideal para ouvir no trânsito/academia</span>
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <i data-lucide="check" class="text-emerald-500 w-4 h-4 shrink-0"></i>
+                                <span>Conteúdo idêntico ao e-book escrito</span>
+                            </li>
+                            <li class="flex items-center gap-2 text-slate-300 line-through">
+                                <i data-lucide="x" class="text-slate-300 w-4 h-4 shrink-0"></i>
+                                <span>Ebook Escrito em formato digital</span>
+                            </li>
+                            <li class="flex items-center gap-2 text-slate-300 line-through">
+                                <i data-lucide="x" class="text-slate-300 w-4 h-4 shrink-0"></i>
+                                <span>Templates de Mensagens & bônus</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="pt-8">
+                        <a href="https://pay.hotmart.com/AudiobookLinkPlaceholder" id="btnAudiobookLink" class="block w-full bg-brand-navy hover:bg-brand-navyDark text-white text-center font-bold py-3 px-4 rounded-xl transition-all text-sm">
+                            Comprar Audiobook
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- TESTIMONIAL / SUCCESS PATH SECTION -->
+    <section class="py-20 gradient-bg border-t border-orange-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-16 space-y-4">
+                <span class="text-brand-orange font-bold text-xs uppercase tracking-widest">Sua hora de voar</span>
+                <h2 class="text-3xl font-extrabold text-brand-navy">O que estão dizendo do Método?</h2>
+                <p class="text-slate-600">Estudantes, profissionais em transição de carreira e recém-formados aprovam o Guia.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Testimonial 1 -->
+                <div class="bg-white p-6 rounded-2xl border border-orange-100 shadow-sm space-y-4">
+                    <div class="flex gap-1 text-amber-500">
+                        <i data-lucide="star" class="w-4 h-4 fill-amber-500"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-amber-500"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-amber-500"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-amber-500"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-amber-500"></i>
+                    </div>
+                    <p class="text-xs text-slate-600 italic">
+                        "Eu nunca tinha criado um LinkedIn porque achava muito intimidador. O e-book me ensinou a estruturar o perfil de forma simples. Em 2 semanas de perfil pronto, um recrutador me chamou para entrevista."
+                    </p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-slate-200 flex items-center justify-center font-bold text-xs text-slate-700">M.S.</div>
+                        <div>
+                            <span class="font-bold text-xs text-brand-navy block">Mariana Silva</span>
+                            <span class="text-[10px] text-slate-400 block">Estudante de Marketing</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 2 -->
+                <div class="bg-white p-6 rounded-2xl border border-orange-100 shadow-sm space-y-4">
+                    <div class="flex gap-1 text-amber-500">
+                        <i data-lucide="star" class="w-4 h-4 fill-amber-500"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-amber-500"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-amber-500"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-amber-500"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-amber-500"></i>
+                    </div>
+                    <p class="text-xs text-slate-600 italic">
+                        "O audiobook mudou o jogo. Eu escutava indo para o meu trabalho anterior enquanto decidia mudar de área. O checklist me ajudou a não esquecer nenhum detalhe ao refazer meu resumo e título."
+                    </p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-slate-200 flex items-center justify-center font-bold text-xs text-slate-700">R.A.</div>
+                        <div>
+                            <span class="font-bold text-xs text-brand-navy block">Rodrigo Alves</span>
+                            <span class="text-[10px] text-slate-400 block">Analista de Sistemas</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 3 -->
+                <div class="bg-white p-6 rounded-2xl border border-orange-100 shadow-sm space-y-4">
+                    <div class="flex gap-1 text-amber-500">
+                        <i data-lucide="star" class="w-4 h-4 fill-amber-500"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-amber-500"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-amber-500"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-amber-500"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-amber-500"></i>
+                    </div>
+                    <p class="text-xs text-slate-600 italic">
+                        "O que mais valeu a pena para mim foram os Templates de mensagens para abordagem. Eu travava muito na hora de escrever para os profissionais e os modelos facilitaram absurdamente meu contato."
+                    </p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-slate-200 flex items-center justify-center font-bold text-xs text-slate-700">C.O.</div>
+                        <div>
+                            <span class="font-bold text-xs text-brand-navy block">Camila Oliveira</span>
+                            <span class="text-[10px] text-slate-400 block">Recém-formada em Administração</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PORTUGUESE EXCLUSIVE AFFILIATES SECTION -->
+    <section id="afiliados" class="py-20 bg-slate-900 text-white relative">
+        <div class="absolute inset-0 bg-brand-navy/30 pointer-events-none"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                
+                <!-- Affiliate Pitch -->
+                <div class="space-y-6">
+                    <span class="text-brand-orange font-bold text-xs uppercase tracking-widest block">🤑 Seja Nosso Parceiro de Vendas</span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight">Quer faturar vendendo este produto?</h2>
+                    <p class="text-slate-300 leading-relaxed text-sm">
+                        O LinkedIn é a rede que mais cresce no Brasil, mas 90% das pessoas não sabem como usá-lo estrategicamente de graça. O mercado para este guia é gigante! Seja um afiliado oficial na Hotmart e ganhe comissão por cada indicação.
+                    </p>
+
+                    <div class="grid sm:grid-cols-2 gap-6 pt-4">
+                        <div class="flex gap-3">
+                            <span class="p-2 bg-slate-800 text-brand-orange rounded-xl shrink-0 h-10 w-10 flex items-center justify-center"><i data-lucide="percent" class="w-5 h-5"></i></span>
+                            <div>
+                                <h4 class="font-bold text-sm">Altas Comissões</h4>
+                                <p class="text-xs text-slate-400 mt-1">Ganhe até 60% de comissão em cada indicação de venda direta.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-3">
+                            <span class="p-2 bg-slate-800 text-brand-orange rounded-xl shrink-0 h-10 w-10 flex items-center justify-center"><i data-lucide="image" class="w-5 h-5"></i></span>
+                            <div>
+                                <h4 class="font-bold text-sm">Material de Apoio Completo</h4>
+                                <p class="text-xs text-slate-400 mt-1">Gere suas campanhas com criativos prontos, copies e imagens de altíssima qualidade.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-3">
+                            <span class="p-2 bg-slate-800 text-brand-orange rounded-xl shrink-0 h-10 w-10 flex items-center justify-center"><i data-lucide="trending-up" class="w-5 h-5"></i></span>
+                            <div>
+                                <h4 class="font-bold text-sm">Baixo Atrito de Compra</h4>
+                                <p class="text-xs text-slate-400 mt-1">Preço extremamente amigável (R$ 19,90 a R$ 49,90) ideal para vendas por impulso e volume.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-3">
+                            <span class="p-2 bg-slate-800 text-brand-orange rounded-xl shrink-0 h-10 w-10 flex items-center justify-center"><i data-lucide="life-buoy" class="w-5 h-5"></i></span>
+                            <div>
+                                <h4 class="font-bold text-sm">Suporte Dedicado</h4>
+                                <p class="text-xs text-slate-400 mt-1">Grupo de suporte para te ajudar a otimizar seus anúncios e abordagens orgânicas.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Affiliate Materials download card -->
+                <div class="bg-slate-800 rounded-3xl p-8 border border-slate-700 space-y-6">
+                    <h3 class="text-xl font-bold">🛠️ Kit de Ferramentas do Afiliado</h3>
+                    <p class="text-xs text-slate-400">Tudo o que você precisa para começar a vender hoje mesmo e colocar dinheiro no seu bolso.</p>
+                    
+                    <div class="space-y-4">
+                        <div class="bg-slate-900 p-4 rounded-xl flex items-center justify-between border border-slate-700/50">
+                            <div>
+                                <span class="font-semibold text-xs text-slate-300 block">Imagens do Produto (Mockups)</span>
+                                <span class="text-[10px] text-slate-500">Incluindo as capas oficiais editadas para campanhas</span>
+                            </div>
+                            <button onclick="copyToClipboard('cfgDriveLink')" class="text-xs bg-slate-800 hover:bg-slate-700 font-bold px-3 py-1.5 rounded-lg flex items-center gap-1 transition-all">
+                                <i data-lucide="copy" class="w-3.5 h-3.5"></i> Copiar Link do Drive
+                            </button>
+                        </div>
+
+                        <div class="bg-slate-900 p-4 rounded-xl flex items-center justify-between border border-slate-700/50">
+                            <div>
+                                <span class="font-semibold text-xs text-slate-300 block">Modelo de Copy para Afiliados</span>
+                                <span class="text-[10px] text-slate-500">Textos prontos para posts no LinkedIn e WhatsApp</span>
+                            </div>
+                            <button onclick="copyText('Copy de divulgação recomendada para o Guia de LinkedIn: Aprenda a atrair recrutadores e voar mais alto! Saiba mais no link do perfil!')" class="text-xs bg-slate-800 hover:bg-slate-700 font-bold px-3 py-1.5 rounded-lg flex items-center gap-1 transition-all">
+                                <i data-lucide="copy" class="w-3.5 h-3.5"></i> Copiar Copy
+                            </button>
+                        </div>
+                    </div>
+
+                    <a id="btnDriveFolderLink" href="https://drive.google.com/drive/folders/1AwzigF9I9EQz9wO7swSX4CEM-CaNJL0R?usp=drive_link" target="_blank" class="block w-full bg-brand-orange hover:bg-brand-orangeDark text-center font-bold py-3.5 rounded-xl text-sm transition-all shadow-lg flex items-center justify-center gap-2">
+                        <i data-lucide="folder-open" class="w-4 h-4"></i> Acessar Pasta de Materiais no Google Drive
+                    </a>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="py-20 bg-white border-t border-slate-100">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 space-y-4">
+                <span class="text-brand-orange font-bold text-xs uppercase tracking-widest">Tem alguma dúvida?</span>
+                <h2 class="text-3xl font-extrabold text-brand-navy">Perguntas Frequentes</h2>
+            </div>
+
+            <div class="space-y-4">
+                <div class="border border-slate-200 rounded-xl p-5 hover:border-brand-orange transition-all">
+                    <button onclick="toggleFaq(1)" class="w-full flex justify-between items-center text-left font-bold text-brand-navy">
+                        <span>Preciso ter a conta Premium do LinkedIn para ter resultados?</span>
+                        <i id="faq-icon-1" data-lucide="chevron-down" class="w-5 h-5 text-slate-400 transition-transform"></i>
+                    </button>
+                    <div id="faq-ans-1" class="hidden mt-3 text-sm text-slate-600 leading-relaxed">
+                        Não! Todo o guia foi construído pensando exclusivamente na utilização dos recursos orgânicos e 100% gratuitos da plataforma. Você não precisará investir em assinatura mensal para ser encontrado por recrutadores.
+                    </div>
+                </div>
+
+                <div class="border border-slate-200 rounded-xl p-5 hover:border-brand-orange transition-all">
+                    <button onclick="toggleFaq(2)" class="w-full flex justify-between items-center text-left font-bold text-brand-navy">
+                        <span>Como recebo o acesso ao e-book, audiobook ou pacote?</span>
+                        <i id="faq-icon-2" data-lucide="chevron-down" class="w-5 h-5 text-slate-400 transition-transform"></i>
+                    </button>
+                    <div id="faq-ans-2" class="hidden mt-3 text-sm text-slate-600 leading-relaxed">
+                        O envio é 100% automatizado pela Hotmart. Assim que o pagamento for aprovado (o Pix aprova em segundos), você receberá um e-mail com as suas credenciais para baixar o e-book, o audiobook e todos os bônus contratados.
+                    </div>
+                </div>
+
+                <div class="border border-slate-200 rounded-xl p-5 hover:border-brand-orange transition-all">
+                    <button onclick="toggleFaq(3)" class="w-full flex justify-between items-center text-left font-bold text-brand-navy">
+                        <span>O Audiobook está em qual formato?</span>
+                        <i id="faq-icon-3" data-lucide="chevron-down" class="w-5 h-5 text-slate-400 transition-transform"></i>
+                    </button>
+                    <div id="faq-ans-3" class="hidden mt-3 text-sm text-slate-600 leading-relaxed">
+                        Ele está no formato de arquivos de áudio padrão de alta fidelidade (.MP3), perfeitamente compatível com qualquer smartphone, computador ou tablet. Você poderá ouvi-lo offline onde desejar.
+                    </div>
+                </div>
+
+                <div class="border border-slate-200 rounded-xl p-5 hover:border-brand-orange transition-all">
+                    <button onclick="toggleFaq(4)" class="w-full flex justify-between items-center text-left font-bold text-brand-navy">
+                        <span>Existe alguma garantia se eu não gostar?</span>
+                        <i id="faq-icon-4" data-lucide="chevron-down" class="w-5 h-5 text-slate-400 transition-transform"></i>
+                    </button>
+                    <div id="faq-ans-4" class="hidden mt-3 text-sm text-slate-600 leading-relaxed">
+                        Sim, você tem 7 dias de garantia total. Se por qualquer motivo achar que o material não ajudou na sua presença profissional, basta solicitar o reembolso na Hotmart e devolveremos o dinheiro integralmente, sem burocracia.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER WITH CREDITS -->
+    <footer class="bg-brand-navy text-slate-400 py-12 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+                
+                <div class="relative w-8 h-8 flex items-center justify-center bg-brand-orange rounded-lg shadow-md">
+                    <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 19V8" stroke="#FFF9D4" stroke-width="2.5" stroke-linecap="round"/>
+                        <path d="M12 8C9 4 4 5 4 10C4 15 9 16 12 14" stroke="#FFF9D4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M12 8C15 4 20 5 20 10C20 15 15 16 12 14" stroke="#FFF9D4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+                <div>
+                    <span class="font-extrabold text-white text-md block leading-none">LINKEDIN</span>
+                    <span class="text-[10px] text-brand-orange font-bold uppercase tracking-widest mt-0.5 block">Iniciantes</span>
+                </div>
+
+                <p class="text-xs text-center md:text-right max-w-md">
+                    Este produto não é associado, patrocinado ou afiliado de nenhuma forma ao LinkedIn Corporation. Todo o conteúdo é fruto de experiência de mercado autônoma do autor.
+                </p>
+            </div>
+
+            <hr class="border-slate-800">
+
+            <div class="flex flex-col md:flex-row items-center justify-between text-[11px] gap-4">
+                <span>&copy; <span id="yearPlaceholder">2026</span> <strong class="text-white" id="footerAuthor">Anderson Chiesa</strong>. Todos os direitos reservados.</span>
+                <div class="flex gap-6">
+                    <a href="#" class="hover:text-white transition-colors">Políticas de Privacidade</a>
+                    <a href="#" class="hover:text-white transition-colors">Termos de Uso</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- LOGIC FOR INTERACTIVITY AND CONFIGURATION SYSTEM -->
+    <script>
+        document.getElementById('yearPlaceholder').innerText = new Date().getFullYear();
+
+        // Control fallback on image rendering error gracefully (Precludes broken icons)
+        function handleImageError(img, type) {
+            img.style.display = 'none';
+            const parent = img.parentElement;
+            let fallbackDiv = parent.querySelector('.fallback-placeholder');
+            if (!fallbackDiv) {
+                fallbackDiv = document.createElement('div');
+                fallbackDiv.className = 'fallback-placeholder absolute inset-0 flex flex-col items-center justify-center p-6 text-center gradient-bg';
+                fallbackDiv.innerHTML = `
+                    <div class="text-brand-navy font-bold text-lg mb-1">${type}</div>
+                    <p class="text-xs text-slate-500 max-w-[200px] leading-relaxed mx-auto">Coloque a imagem "${img.getAttribute('src')}" na mesma pasta onde salvou o HTML.</p>
+                    <i data-lucide="image-off" class="w-8 h-8 text-slate-400 mt-4"></i>
+                `;
+                parent.appendChild(fallbackDiv);
+                lucide.createIcons();
+            }
+        }
+
+        function switchCover(type) {
+            document.getElementById('cover-bundle').classList.add('hidden');
+            document.getElementById('cover-ebook').classList.add('hidden');
+            document.getElementById('cover-audiobook').classList.add('hidden');
+
+            document.getElementById('cover-' + type).classList.remove('hidden');
+
+            const btnTypes = ['bundle', 'ebook', 'audiobook'];
+            btnTypes.forEach(t => {
+                const btn = document.getElementById('btn-cov-' + t);
+                btn.className = "px-4 py-2 rounded-lg text-xs font-bold transition-all text-slate-600 hover:text-slate-950";
+            });
+
+            const activeBtn = document.getElementById('btn-cov-' + type);
+            activeBtn.className = "px-4 py-2 rounded-lg text-xs font-bold transition-all bg-brand-navy text-white shadow-sm";
+        }
+
+        function toggleEditor() {
+            const panel = document.getElementById('editorPanel');
+            panel.classList.toggle('hidden');
+        }
+
+        function applyConfigurations() {
+            const ebookPrice = document.getElementById('cfgEbookPrice').value;
+            const ebookLink = document.getElementById('cfgEbookLink').value;
+            const audiobookPrice = document.getElementById('cfgAudiobookPrice').value;
+            const audiobookLink = document.getElementById('cfgAudiobookLink').value;
+            const bundlePrice = document.getElementById('cfgBundlePrice').value;
+            const bundleLink = document.getElementById('cfgBundleLink').value;
+            const authorName = document.getElementById('cfgAuthorName').value;
+            const driveLink = document.getElementById('cfgDriveLink').value;
+
+            // Cover Image links
+            const ebookImg = document.getElementById('cfgEbookImg').value;
+            const audiobookImg = document.getElementById('cfgAudiobookImg').value;
+            const bundleImg = document.getElementById('cfgBundleImg').value;
+
+            // Apply Prices
+            document.getElementById('cardEbookPrice').innerText = ebookPrice;
+            document.getElementById('cardAudiobookPrice').innerText = audiobookPrice;
+            document.getElementById('cardBundlePrice').innerText = bundlePrice;
+
+            // Apply Links
+            document.getElementById('btnEbookLink').setAttribute('href', ebookLink);
+            document.getElementById('btnAudiobookLink').setAttribute('href', audiobookLink);
+            document.getElementById('btnBundleLink').setAttribute('href', bundleLink);
+            document.getElementById('btnDriveFolderLink').setAttribute('href', driveLink);
+
+            // Apply Image Paths
+            const imgEb = document.getElementById('img-cover-ebook');
+            const imgAb = document.getElementById('img-cover-audiobook');
+            const imgBd = document.getElementById('img-cover-bundle');
+
+            imgEb.src = ebookImg;
+            imgEb.style.display = 'block';
+            imgAb.src = audiobookImg;
+            imgAb.style.display = 'block';
+            imgBd.src = bundleImg;
+            imgBd.style.display = 'block';
+
+            // Reset image fallbacks
+            document.querySelectorAll('.fallback-placeholder').forEach(el => el.remove());
+
+            // Apply Metadata
+            document.getElementById('footerAuthor').innerText = authorName;
+
+            showNotification("Configurações atualizadas com sucesso!");
+        }
+
+        function showNotification(message) {
+            const notif = document.getElementById('notification');
+            const txt = document.getElementById('notificationText');
+            txt.innerText = message;
+            
+            notif.classList.remove('opacity-0', 'translate-y-[-20px]', 'pointer-events-none');
+            notif.classList.add('opacity-100', 'translate-y-0');
+
+            setTimeout(() => {
+                notif.classList.remove('opacity-100', 'translate-y-0');
+                notif.classList.add('opacity-0', 'translate-y-[-20px]', 'pointer-events-none');
+            }, 3000);
+        }
+
+        function copyToClipboard(inputId) {
+            const val = document.getElementById(inputId).value;
+            const tempInput = document.createElement("input");
+            tempInput.value = val;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempInput);
+            showNotification("Link copiado para a área de transferência!");
+        }
+
+        function copyText(val) {
+            const tempInput = document.createElement("textarea");
+            tempInput.value = val;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempInput);
+            showNotification("Texto de copy copiado!");
+        }
+
+        function toggleFaq(num) {
+            const ans = document.getElementById('faq-ans-' + num);
+            const icon = document.getElementById('faq-icon-' + num);
+
+            if (ans.classList.contains('hidden')) {
+                ans.classList.remove('hidden');
+                icon.style.transform = 'rotate(180deg)';
+            } else {
+                ans.classList.add('hidden');
+                icon.style.transform = 'rotate(0deg)';
+            }
+        }
+
+        function exportCustomizedHTML() {
+            applyConfigurations();
+
+            const ebPrice = document.getElementById('cfgEbookPrice').value;
+            const ebLink = document.getElementById('cfgEbookLink').value;
+            const abPrice = document.getElementById('cfgAudiobookPrice').value;
+            const abLink = document.getElementById('cfgAudiobookLink').value;
+            const bdPrice = document.getElementById('cfgBundlePrice').value;
+            const bdLink = document.getElementById('cfgBundleLink').value;
+            const drLink = document.getElementById('cfgDriveLink').value;
+            const autName = document.getElementById('cfgAuthorName').value;
+            const ebImg = document.getElementById('cfgEbookImg').value;
+            const abImg = document.getElementById('cfgAudiobookImg').value;
+            const bdImg = document.getElementById('cfgBundleImg').value;
+
+            let docHTML = document.documentElement.outerHTML;
+
+            const blob = new Blob([docHTML], { type: "text/html;charset=utf-8" });
+            const link = document.createElement("a");
+            link.href = URL.createObjectURL(blob);
+            link.download = "pagina_de_vendas_linkedin_iniciantes.html";
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            showNotification("Seu arquivo HTML personalizado foi baixado!");
+        }
+
+        window.onload = function() {
+            lucide.createIcons();
+        }
+    </script>
+</body>
+</html>
