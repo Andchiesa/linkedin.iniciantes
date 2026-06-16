@@ -52,7 +52,7 @@
                 fallbackDiv.className = 'fallback-placeholder absolute inset-0 flex flex-col items-center justify-center p-6 text-center gradient-bg';
                 fallbackDiv.innerHTML = `
                     <div class="text-brand-navy font-bold text-lg mb-1">${type}</div>
-                    <p class="text-xs text-slate-500 max-w-[200px] leading-relaxed mx-auto">Carregando imagem real...</p>
+                    <p class="text-xs text-slate-500 max-w-[200px] leading-relaxed mx-auto font-sans">Carregando imagem real...</p>
                     <i data-lucide="image-off" class="w-8 h-8 text-slate-400 mt-4"></i>
                 `;
                 parent.appendChild(fallbackDiv);
@@ -700,21 +700,11 @@
                     <div class="space-y-4">
                         <div class="bg-slate-900 p-4 rounded-xl flex items-center justify-between border border-slate-700/50">
                             <div>
-                                <span class="font-semibold text-xs text-slate-300 block">Imagens do Produto (Mockups)</span>
-                                <span class="text-[10px] text-slate-500">Incluindo as capas oficiais editadas para campanhas</span>
+                                <span class="font-semibold text-xs text-slate-300 block">Pasta de Materiais (Google Drive)</span>
+                                <span class="text-[10px] text-slate-500">Mockups, criativos prontos, copies e roteiros de abordagem</span>
                             </div>
                             <button onclick="copyToClipboard('https://drive.google.com/drive/folders/1AwzigF9I9EQz9wO7swSX4CEM-CaNJL0R?usp=drive_link')" class="text-xs bg-slate-800 hover:bg-slate-700 font-bold px-3 py-1.5 rounded-lg flex items-center gap-1 transition-all">
                                 <i data-lucide="copy" class="w-3.5 h-3.5"></i> Copiar Link do Drive
-                            </button>
-                        </div>
-
-                        <div class="bg-slate-900 p-4 rounded-xl flex items-center justify-between border border-slate-700/50">
-                            <div>
-                                <span class="font-semibold text-xs text-slate-300 block">Modelo de Copy para Afiliados</span>
-                                <span class="text-[10px] text-slate-500">Textos prontos para posts no LinkedIn e WhatsApp</span>
-                            </div>
-                            <button onclick="copyText('Copy de divulgação recomendada para o Guia de LinkedIn: Aprenda a atrair recrutadores e voar mais alto! Saiba mais no link do perfil!')" class="text-xs bg-slate-800 hover:bg-slate-700 font-bold px-3 py-1.5 rounded-lg flex items-center gap-1 transition-all">
-                                <i data-lucide="copy" class="w-3.5 h-3.5"></i> Copiar Copy
                             </button>
                         </div>
                     </div>
@@ -733,14 +723,14 @@
     <section class="py-20 bg-white border-t border-slate-100">
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16 space-y-4">
-                <span class="text-brand-orange font-bold text-xs uppercase tracking-widest">Tem alguma dúvida?</span>
+                <span class="text-brand-orange font-bold text-xs uppercase tracking-test">Tem alguma dúvida?</span>
                 <h2 class="text-3xl font-extrabold text-brand-navy">Perguntas Frequentes</h2>
             </div>
 
             <div class="space-y-4">
                 <div class="border border-slate-200 rounded-xl p-5 hover:border-brand-orange transition-all">
                     <button onclick="toggleFaq(1)" class="w-full flex justify-between items-center text-left font-bold text-brand-navy">
-                        <span>Preciso ter a conta Premium do LinkedIn para ter resultados?</span>
+                        <span>Preciso ter a conta Premium do LinkedIn para tener resultados?</span>
                         <i id="faq-icon-1" data-lucide="chevron-down" class="w-5 h-5 text-slate-400 transition-transform"></i>
                     </button>
                     <div id="faq-ans-1" class="hidden mt-3 text-sm text-slate-600 leading-relaxed">
