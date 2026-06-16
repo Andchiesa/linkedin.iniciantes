@@ -29,7 +29,7 @@
         }
     </script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght=300;400;500;600;700;800&display=swap');
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
             background-color: #FFFDF0;
@@ -41,7 +41,7 @@
             box-shadow: 0 10px 25px -5px rgba(255, 85, 0, 0.4);
         }
     </style>
-    <!-- CORRIGIDO: handleImageError definida no cabeçalho garante que o onerror das imagens funcione instantaneamente -->
+    <!-- Função global de tratamento de erro de imagem para exibir placeholders elegantes caso as imagens falhem -->
     <script>
         function handleImageError(img, type) {
             img.style.display = 'none';
@@ -52,7 +52,7 @@
                 fallbackDiv.className = 'fallback-placeholder absolute inset-0 flex flex-col items-center justify-center p-6 text-center gradient-bg';
                 fallbackDiv.innerHTML = `
                     <div class="text-brand-navy font-bold text-lg mb-1">${type}</div>
-                    <p class="text-xs text-slate-500 max-w-[200px] leading-relaxed mx-auto">Coloque a imagem "${img.getAttribute('src')}" na mesma pasta onde salvou o HTML.</p>
+                    <p class="text-xs text-slate-500 max-w-[200px] leading-relaxed mx-auto">Carregando imagem real...</p>
                     <i data-lucide="image-off" class="w-8 h-8 text-slate-400 mt-4"></i>
                 `;
                 parent.appendChild(fallbackDiv);
@@ -70,111 +70,10 @@
         🔥 <span class="text-brand-orange">Oferta Especial de Lançamento:</span> Garanta o Pacote Completo com mais de 50% de Desconto!
     </div>
 
-    <!-- LIVE CUSTOMIZER / EDITOR PANEL -->
-    <div id="editorPanel" class="fixed bottom-4 right-4 z-50 w-[calc(100vw-2rem)] sm:w-[450px] bg-white border border-slate-200 rounded-2xl shadow-2xl p-6 transition-all duration-300 transform translate-y-0 scale-100 max-h-[85vh] overflow-y-auto hidden">
-        <div class="flex items-center justify-between border-b pb-3 mb-4">
-            <div class="flex items-center gap-2">
-                <i data-lucide="sliders" class="text-brand-orange w-5 h-5"></i>
-                <h3 class="font-bold text-slate-900">Configurador Hotmart</h3>
-            </div>
-            <button onclick="toggleEditor()" class="p-1 hover:bg-slate-100 rounded-lg">
-                <i data-lucide="x" class="w-5 h-5"></i>
-            </button>
-        </div>
-        
-        <p class="text-xs text-slate-500 mb-5">Insira seus links reais de checkout da Hotmart abaixo e clique em aplicar. A página atualizará automaticamente todos os botões de compra!</p>
-        
-        <div class="space-y-5">
-            <!-- COVERS IMAGES CONFIGURATION -->
-            <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-100 space-y-3">
-                <span class="text-[10px] font-black tracking-widest text-brand-navy uppercase block">Imagens Reais das Capas</span>
-                <div>
-                    <label class="block text-[10px] font-bold uppercase text-slate-500 mb-1">Imagem do Ebook</label>
-                    <input type="text" id="cfgEbookImg" value="Ebook - Guia Linkedin.jpg" class="w-full border border-slate-200 bg-white rounded-lg p-2 text-xs focus:ring-2 focus:ring-brand-orange focus:outline-none font-mono text-slate-600">
-                </div>
-                <div>
-                    <label class="block text-[10px] font-bold uppercase text-slate-500 mb-1">Imagem do Audiobook</label>
-                    <input type="text" id="cfgAudiobookImg" value="Audiobook - Guia Linkedin.jpg" class="w-full border border-slate-200 bg-white rounded-lg p-2 text-xs focus:ring-2 focus:ring-brand-orange focus:outline-none font-mono text-slate-600">
-                </div>
-                <div>
-                    <label class="block text-[10px] font-bold uppercase text-slate-500 mb-1">Imagem do Pacote</label>
-                    <input type="text" id="cfgBundleImg" value="Pacote - Produto Digital.jpg" class="w-full border border-slate-200 bg-white rounded-lg p-2 text-xs focus:ring-2 focus:ring-brand-orange focus:outline-none font-mono text-slate-600">
-                </div>
-            </div>
-
-            <!-- EBOOK SECTION -->
-            <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-100 space-y-3">
-                <span class="text-[10px] font-black tracking-widest text-brand-navy uppercase block">Configurações do Ebook</span>
-                <div>
-                    <label class="block text-[10px] font-bold uppercase text-slate-500 mb-1">Preço do Ebook (R$)</label>
-                    <input type="text" id="cfgEbookPrice" value="19,90" class="w-full border border-slate-200 bg-white rounded-lg p-2 text-sm focus:ring-2 focus:ring-brand-orange focus:outline-none font-semibold">
-                </div>
-                <div>
-                    <label class="block text-[10px] font-bold uppercase text-slate-500 mb-1">Link de Checkout</label>
-                    <input type="text" id="cfgEbookLink" value="https://pay.hotmart.com/EbookLinkPlaceholder" class="w-full border border-slate-200 bg-white rounded-lg p-2 text-xs focus:ring-2 focus:ring-brand-orange focus:outline-none font-mono text-slate-600">
-                </div>
-            </div>
-            
-            <!-- AUDIOBOOK SECTION -->
-            <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-100 space-y-3">
-                <span class="text-[10px] font-black tracking-widest text-brand-navy uppercase block">Configurações do Audiobook</span>
-                <div>
-                    <label class="block text-[10px] font-bold uppercase text-slate-500 mb-1">Preço do Audiobook (R$)</label>
-                    <input type="text" id="cfgAudiobookPrice" value="39,90" class="w-full border border-slate-200 bg-white rounded-lg p-2 text-sm focus:ring-2 focus:ring-brand-orange focus:outline-none font-semibold">
-                </div>
-                <div>
-                    <label class="block text-[10px] font-bold uppercase text-slate-500 mb-1">Link de Checkout</label>
-                    <input type="text" id="cfgAudiobookLink" value="https://pay.hotmart.com/AudiobookLinkPlaceholder" class="w-full border border-slate-200 bg-white rounded-lg p-2 text-xs focus:ring-2 focus:ring-brand-orange focus:outline-none font-mono text-slate-600">
-                </div>
-            </div>
-            
-            <!-- BUNDLE SECTION -->
-            <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-100 space-y-3">
-                <span class="text-[10px] font-black tracking-widest text-brand-navy uppercase block">Configurações do Pacote</span>
-                <div>
-                    <label class="block text-[10px] font-bold uppercase text-slate-500 mb-1">Preço do Pacote (R$)</label>
-                    <input type="text" id="cfgBundlePrice" value="49,90" class="w-full border border-slate-200 bg-white rounded-lg p-2 text-sm focus:ring-2 focus:ring-brand-orange focus:outline-none font-semibold">
-                </div>
-                <div>
-                    <label class="block text-[10px] font-bold uppercase text-slate-500 mb-1">Link de Checkout</label>
-                    <input type="text" id="cfgBundleLink" value="https://pay.hotmart.com/BundleLinkPlaceholder" class="w-full border border-slate-200 bg-white rounded-lg p-2 text-xs focus:ring-2 focus:ring-brand-orange focus:outline-none font-mono text-slate-600">
-                </div>
-            </div>
-            
-            <!-- ADDITIONAL FIELDS -->
-            <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-100 space-y-3">
-                <span class="text-[10px] font-black tracking-widest text-brand-navy uppercase block">Metadados Gerais</span>
-                <div>
-                    <label class="block text-[10px] font-bold uppercase text-slate-500 mb-1">Pasta do Google Drive (Materiais do Afiliado)</label>
-                    <input type="text" id="cfgDriveLink" value="https://drive.google.com/drive/folders/1AwzigF9I9EQz9wO7swSX4CEM-CaNJL0R?usp=drive_link" class="w-full border border-slate-200 bg-white rounded-lg p-2 text-xs focus:ring-2 focus:ring-brand-orange focus:outline-none font-mono text-slate-600">
-                </div>
-                <div>
-                    <label class="block text-[10px] font-bold uppercase text-slate-500 mb-1">Nome do Autor</label>
-                    <input type="text" id="cfgAuthorName" value="Anderson Chiesa" class="w-full border border-slate-200 bg-white rounded-lg p-2 text-sm focus:ring-2 focus:ring-brand-orange focus:outline-none font-semibold">
-                </div>
-            </div>
-
-            <div class="pt-2 space-y-2">
-                <button onclick="applyConfigurations()" class="w-full bg-brand-orange hover:bg-brand-orangeDark text-white font-bold py-3 rounded-xl text-sm transition-all shadow-md">
-                    Aplicar e Atualizar Página
-                </button>
-                <button onclick="exportCustomizedHTML()" class="w-full bg-brand-navy hover:bg-brand-navyDark text-white font-bold py-2.5 rounded-xl text-xs transition-all flex items-center justify-center gap-1.5">
-                    <i data-lucide="download" class="w-4 h-4"></i> Baixar HTML Pronto para Hotmart
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <!-- FLOATING CONFIG BUTTON -->
-    <button onclick="toggleEditor()" class="fixed bottom-4 right-4 z-40 bg-brand-navy text-white hover:bg-brand-navyDark p-4 rounded-full shadow-2xl flex items-center justify-center gap-2 border-2 border-white transition-all transform hover:scale-105">
-        <i data-lucide="settings" class="w-6 h-6 animate-spin-slow"></i>
-        <span class="text-xs font-bold pr-1">Configurar Página</span>
-    </button>
-
-    <!-- NOTIFICATION BOX -->
+    <!-- NOTIFICATION BOX (Para feedbacks de links copiados) -->
     <div id="notification" class="fixed top-5 left-1/2 transform -translate-x-1/2 z-50 bg-slate-900 text-white px-6 py-3 rounded-xl shadow-2xl flex items-center gap-2 transition-all duration-300 opacity-0 translate-y-[-20px] pointer-events-none">
         <i data-lucide="check-circle" class="text-emerald-400 w-5 h-5"></i>
-        <span id="notificationText" class="text-sm font-medium">Configurações salvas!</span>
+        <span id="notificationText" class="text-sm font-medium"></span>
     </div>
 
     <!-- MAIN HEADER -->
@@ -304,7 +203,7 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
                 <span class="text-brand-orange font-bold text-xs uppercase tracking-widest">A Metamorfose do Seu Perfil</span>
-                <h2 class="text-3xl sm:text-4xl font-extrabold text-brand-navy">O Concepto do Casulo (Crisálida)</h2>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-brand-navy">O Conceito do Casulo (Crisálida)</h2>
                 <p class="text-slate-600 text-lg">
                     Assim como uma borboleta passa pelo estágio de crisálida para se transformar em sua forma mais gloriosa, o seu perfil no LinkedIn hoje é apenas o começo da sua evolução.
                 </p>
@@ -488,7 +387,7 @@
                             <span class="text-xs text-slate-400 font-medium">Pág. 126</span>
                         </div>
                         <h3 class="text-lg font-bold text-brand-navy mb-3">Dicas Extras e Boas Práticas (Conta Gratuita)</h3>
-                        <ul class="space-y-2.5 text-sm text-slate-600">
+                        <ul class="space-y-2.5 text-sm text-slate-600 font-medium">
                             <li class="flex items-start gap-2.5">
                                 <i data-lucide="play-circle" class="w-4 h-4 text-brand-orange mt-0.5 shrink-0"></i>
                                 <span><strong>Lição 1:</strong> Consistência e Frequência no LinkedIn.</span>
@@ -509,7 +408,7 @@
         </div>
     </section>
 
-    <!-- PRICING TABLE -->
+    <!-- PRICING TABLE WITH REAL HOTMART CHECKOUT LINKS -->
     <section id="precos" class="py-20 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center max-w-2xl mx-auto mb-16 space-y-4">
@@ -520,7 +419,7 @@
 
             <div class="grid md:grid-cols-3 gap-8 items-stretch">
                 
-                <!-- Card 1: Ebook Standard -->
+                <!-- Card 1: Ebook Standard (HOTMART LINK: https://pay.hotmart.com/S100419600M) -->
                 <div class="border border-slate-200 hover:border-brand-navy rounded-3xl p-8 bg-white flex flex-col justify-between transition-all hover:shadow-lg relative">
                     <div class="space-y-6">
                         <div>
@@ -531,7 +430,7 @@
 
                         <div class="pt-4 border-t border-slate-100 flex items-baseline gap-1">
                             <span class="text-sm font-semibold text-slate-500">R$</span>
-                            <span class="text-4xl font-black text-brand-navy" id="cardEbookPrice">19,90</span>
+                            <span class="text-4xl font-black text-brand-navy">19,90</span>
                             <span class="text-xs text-slate-400">Taxa única</span>
                         </div>
 
@@ -560,13 +459,13 @@
                     </div>
 
                     <div class="pt-8">
-                        <a href="https://pay.hotmart.com/EbookLinkPlaceholder" id="btnEbookLink" class="block w-full bg-brand-navy hover:bg-brand-navyDark text-white text-center font-bold py-3 px-4 rounded-xl transition-all text-sm">
+                        <a href="https://pay.hotmart.com/S100419600M" class="block w-full bg-brand-navy hover:bg-brand-navyDark text-white text-center font-bold py-3 px-4 rounded-xl transition-all text-sm">
                             Comprar Ebook
                         </a>
                     </div>
                 </div>
 
-                <!-- Card 2: BUNDLE (Most Popular/Best Value) -->
+                <!-- Card 2: BUNDLE (HOTMART LINK: https://pay.hotmart.com/K100687533M) -->
                 <div class="border-2 border-brand-orange rounded-3xl p-8 bg-[#FFFDF0] flex flex-col justify-between transition-all shadow-xl hover:shadow-2xl relative transform md:-translate-y-4">
                     <div class="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-brand-orange text-white text-xs font-black px-4 py-1.5 rounded-full uppercase tracking-widest shadow-md">
                         🔥 MELHOR CUSTO-BENEFÍCIO
@@ -583,7 +482,7 @@
                             <span class="text-xs text-slate-400 block line-through">De: R$ 109,70</span>
                             <div class="flex items-baseline gap-1 mt-1">
                                 <span class="text-sm font-semibold text-brand-orange">R$</span>
-                                <span class="text-5xl font-black text-brand-navy" id="cardBundlePrice">49,90</span>
+                                <span class="text-5xl font-black text-brand-navy">49,90</span>
                                 <span class="text-xs text-slate-500">Taxa única</span>
                             </div>
                         </div>
@@ -613,14 +512,14 @@
                     </div>
 
                     <div class="pt-8">
-                        <a href="https://pay.hotmart.com/BundleLinkPlaceholder" id="btnBundleLink" class="block w-full bg-brand-orange hover:bg-brand-orangeDark text-white text-center font-extrabold py-4 px-4 rounded-xl transition-all text-sm shadow-md shadow-orange-500/10 glow-orange">
+                        <a href="https://pay.hotmart.com/K100687533M" class="block w-full bg-brand-orange hover:bg-brand-orangeDark text-white text-center font-extrabold py-4 px-4 rounded-xl transition-all text-sm shadow-md shadow-orange-500/10 glow-orange">
                             Comprar Pacote Completo
                         </a>
                         <span class="text-[10px] text-slate-500 text-center block mt-2">Acesso vitalício aos materiais</span>
                     </div>
                 </div>
 
-                <!-- Card 3: Audiobook Only -->
+                <!-- Card 3: Audiobook Only (HOTMART LINK: https://pay.hotmart.com/W106104659U) -->
                 <div class="border border-slate-200 hover:border-brand-navy rounded-3xl p-8 bg-white flex flex-col justify-between transition-all hover:shadow-lg relative">
                     <div class="space-y-6">
                         <div>
@@ -631,7 +530,7 @@
 
                         <div class="pt-4 border-t border-slate-100 flex items-baseline gap-1">
                             <span class="text-sm font-semibold text-slate-500">R$</span>
-                            <span class="text-4xl font-black text-brand-navy" id="cardAudiobookPrice">39,90</span>
+                            <span class="text-4xl font-black text-brand-navy">39,90</span>
                             <span class="text-xs text-slate-400">Taxa única</span>
                         </div>
 
@@ -660,7 +559,7 @@
                     </div>
 
                     <div class="pt-8">
-                        <a href="https://pay.hotmart.com/AudiobookLinkPlaceholder" id="btnAudiobookLink" class="block w-full bg-brand-navy hover:bg-brand-navyDark text-white text-center font-bold py-3 px-4 rounded-xl transition-all text-sm">
+                        <a href="https://pay.hotmart.com/W106104659U" class="block w-full bg-brand-navy hover:bg-brand-navyDark text-white text-center font-bold py-3 px-4 rounded-xl transition-all text-sm">
                             Comprar Audiobook
                         </a>
                     </div>
@@ -746,7 +645,7 @@
         </div>
     </section>
 
-    <!-- PORTUGUESE EXCLUSIVE AFFILIATES SECTION -->
+    <!-- PORTUGUESE EXCLUSIVE AFFILIATES SECTION (With Drive folders links) -->
     <section id="afiliados" class="py-20 bg-slate-900 text-white relative">
         <div class="absolute inset-0 bg-brand-navy/30 pointer-events-none"></div>
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -755,7 +654,7 @@
                 
                 <!-- Affiliate Pitch -->
                 <div class="space-y-6">
-                    <span class="text-brand-orange font-bold text-xs uppercase tracking-widest block">🤑 Seja Nosso Parceiro de Vendas</span>
+                    <span class="text-brand-orange font-bold text-xs uppercase tracking-widest block">🤑 Seja Nosso Partner de Vendas</span>
                     <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight">Quer faturar vendendo este produto?</h2>
                     <p class="text-slate-300 leading-relaxed text-sm">
                         O LinkedIn é a rede que mais cresce no Brasil, mas 90% das pessoas não sabem como usá-lo estrategicamente de graça. O mercado para este guia é gigante! Seja um afiliado oficial na Hotmart e ganhe comissão por cada indicação.
@@ -804,7 +703,7 @@
                                 <span class="font-semibold text-xs text-slate-300 block">Imagens do Produto (Mockups)</span>
                                 <span class="text-[10px] text-slate-500">Incluindo as capas oficiais editadas para campanhas</span>
                             </div>
-                            <button onclick="copyToClipboard('cfgDriveLink')" class="text-xs bg-slate-800 hover:bg-slate-700 font-bold px-3 py-1.5 rounded-lg flex items-center gap-1 transition-all">
+                            <button onclick="copyToClipboard('https://drive.google.com/drive/folders/1AwzigF9I9EQz9wO7swSX4CEM-CaNJL0R?usp=drive_link')" class="text-xs bg-slate-800 hover:bg-slate-700 font-bold px-3 py-1.5 rounded-lg flex items-center gap-1 transition-all">
                                 <i data-lucide="copy" class="w-3.5 h-3.5"></i> Copiar Link do Drive
                             </button>
                         </div>
@@ -909,7 +808,7 @@
             <hr class="border-slate-800">
 
             <div class="flex flex-col md:flex-row items-center justify-between text-[11px] gap-4">
-                <span>&copy; <span id="yearPlaceholder">2026</span> <strong class="text-white" id="footerAuthor">Anderson Chiesa</strong>. Todos os direitos reservados.</span>
+                <span>&copy; <span id="yearPlaceholder">2026</span> <strong class="text-white">Anderson Chiesa</strong>. Todos os direitos reservados.</span>
                 <div class="flex gap-6">
                     <a href="#" class="hover:text-white transition-colors">Políticas de Privacidade</a>
                     <a href="#" class="hover:text-white transition-colors">Termos de Uso</a>
@@ -918,7 +817,7 @@
         </div>
     </footer>
 
-    <!-- LOGIC FOR INTERACTIVITY AND CONFIGURATION SYSTEM -->
+    <!-- LOGIC FOR INTERACTIVITY -->
     <script>
         document.getElementById('yearPlaceholder').innerText = new Date().getFullYear();
 
@@ -932,110 +831,33 @@
             const btnTypes = ['bundle', 'ebook', 'audiobook'];
             btnTypes.forEach(t => {
                 const btn = document.getElementById('btn-cov-' + t);
-                btn.className = "px-4 py-2 rounded-lg text-xs font-bold transition-all text-slate-600 hover:text-slate-950";
+                if (btn) {
+                    btn.className = "px-4 py-2 rounded-lg text-xs font-bold transition-all text-slate-600 hover:text-slate-950";
+                }
             });
 
             const activeBtn = document.getElementById('btn-cov-' + type);
-            activeBtn.className = "px-4 py-2 rounded-lg text-xs font-bold transition-all bg-brand-navy text-white shadow-sm";
-        }
-
-        function toggleEditor() {
-            const panel = document.getElementById('editorPanel');
-            panel.classList.toggle('hidden');
-        }
-
-        function applyConfigurations() {
-            const getValue = (id) => {
-                const el = document.getElementById(id);
-                return el ? el.value : '';
-            };
-
-            const ebookPrice = getValue('cfgEbookPrice');
-            const ebookLink = getValue('cfgEbookLink');
-            const audiobookPrice = getValue('cfgAudiobookPrice');
-            const audiobookLink = getValue('cfgAudiobookLink');
-            const bundlePrice = getValue('cfgBundlePrice');
-            const bundleLink = getValue('cfgBundleLink');
-            const authorName = getValue('cfgAuthorName');
-            const driveLink = getValue('cfgDriveLink');
-
-            const ebookImg = getValue('cfgEbookImg');
-            const audiobookImg = getValue('cfgAudiobookImg');
-            const bundleImg = getValue('cfgBundleImg');
-
-            const setInnerText = (id, text) => {
-                const el = document.getElementById(id);
-                if (el) el.innerText = text;
-            };
-
-            const setAttributeValue = (id, attr, value) => {
-                const el = document.getElementById(id);
-                if (el) el.setAttribute(attr, value);
-            };
-
-            setInnerText('cardEbookPrice', ebookPrice);
-            setInnerText('cardAudiobookPrice', audiobookPrice);
-            setInnerText('cardBundlePrice', bundlePrice);
-
-            setAttributeValue('btnEbookLink', 'href', ebookLink);
-            setAttributeValue('btnAudiobookLink', 'href', audiobookLink);
-            setAttributeValue('btnBundleLink', 'href', bundleLink);
-            setAttributeValue('btnDriveFolderLink', 'href', driveLink);
-
-            const imgEb = document.getElementById('img-cover-ebook');
-            const imgAb = document.getElementById('img-cover-audiobook');
-            const imgBd = document.getElementById('img-cover-bundle');
-
-            if (imgEb && ebookImg) {
-                imgEb.src = ebookImg;
-                imgEb.style.display = 'block';
-            }
-            if (imgAb && audiobookImg) {
-                imgAb.src = audiobookImg;
-                imgAb.style.display = 'block';
-            }
-            if (imgBd && bundleImg) {
-                imgBd.src = bundleImg;
-                imgBd.style.display = 'block';
-            }
-
-            const lblAuthorBundle = document.getElementById('lblAuthorBundle');
-            if (lblAuthorBundle) lblAuthorBundle.innerText = authorName;
-
-            const lblAuthorEbook = document.getElementById('lblAuthorEbook');
-            if (lblAuthorEbook) lblAuthorEbook.innerText = authorName;
-
-            const lblAuthorAudio = document.getElementById('lblAuthorAudio');
-            if (lblAuthorAudio) lblAuthorAudio.innerText = authorName;
-
-            const footerAuthor = document.getElementById('footerAuthor');
-            if (footerAuthor) footerAuthor.innerText = authorName;
-
-            document.querySelectorAll('.fallback-placeholder').forEach(el => el.remove());
-
-            showNotification("Configurações atualizadas com sucesso!");
-        }
-
-        function showNotification(message) {
-            const notif = document.getElementById('notification');
-            const txt = document.getElementById('notificationText');
-            if (txt) txt.innerText = message;
-            
-            if (notif) {
-                notif.classList.remove('opacity-0', 'translate-y-[-20px]', 'pointer-events-none');
-                notif.classList.add('opacity-100', 'translate-y-0');
-
-                setTimeout(() => {
-                    notif.classList.remove('opacity-100', 'translate-y-0');
-                    notif.classList.add('opacity-0', 'translate-y-[-20px]', 'pointer-events-none');
-                }, 3000);
+            if (activeBtn) {
+                activeBtn.className = "px-4 py-2 rounded-lg text-xs font-bold transition-all bg-brand-navy text-white shadow-sm";
             }
         }
 
-        function copyToClipboard(inputId) {
-            const el = document.getElementById(inputId);
-            if (!el) return;
-            const val = el.value;
+        function toggleFaq(num) {
+            const ans = document.getElementById('faq-ans-' + num);
+            const icon = document.getElementById('faq-icon-' + num);
+
+            if (ans && icon) {
+                if (ans.classList.contains('hidden')) {
+                    ans.classList.remove('hidden');
+                    icon.style.transform = 'rotate(180deg)';
+                } else {
+                    ans.classList.add('hidden');
+                    icon.style.transform = 'rotate(0deg)';
+                }
+            }
+        }
+
+        function copyToClipboard(val) {
             const tempInput = document.createElement("input");
             tempInput.value = val;
             document.body.appendChild(tempInput);
@@ -1055,32 +877,20 @@
             showNotification("Texto de copy copiado!");
         }
 
-        function toggleFaq(num) {
-            const ans = document.getElementById('faq-ans-' + num);
-            const icon = document.getElementById('faq-icon-' + num);
+        function showNotification(message) {
+            const notif = document.getElementById('notification');
+            const txt = document.getElementById('notificationText');
+            if (txt) txt.innerText = message;
+            
+            if (notif) {
+                notif.classList.remove('opacity-0', 'translate-y-[-20px]', 'pointer-events-none');
+                notif.classList.add('opacity-100', 'translate-y-0');
 
-            if (ans && icon) {
-                if (ans.classList.contains('hidden')) {
-                    ans.classList.remove('hidden');
-                    icon.style.transform = 'rotate(180deg)';
-                } else {
-                    ans.classList.add('hidden');
-                    icon.style.transform = 'rotate(0deg)';
-                }
+                setTimeout(() => {
+                    notif.classList.remove('opacity-100', 'translate-y-0');
+                    notif.classList.add('opacity-0', 'translate-y-[-20px]', 'pointer-events-none');
+                }, 3000);
             }
-        }
-
-        function exportCustomizedHTML() {
-            applyConfigurations();
-            let docHTML = document.documentElement.outerHTML;
-            const blob = new Blob([docHTML], { type: "text/html;charset=utf-8" });
-            const link = document.createElement("a");
-            link.href = URL.createObjectURL(blob);
-            link.download = "pagina_de_vendas_linkedin_iniciantes.html";
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-            showNotification("Seu arquivo HTML personalizado foi baixado!");
         }
 
         window.onload = function() {
